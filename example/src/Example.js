@@ -23,13 +23,13 @@ const Example = () => {
       <Card elevation={5} className="rating">
         <CardHeader title="Past reviews" />
         <CardContent>
-          <Evaluated length={5} average={3.3} />
+          <Evaluated length={10} average={8.3} />
           <SyntaxHighlighter language="javascript" style={prism}>
             {`
 import { Evaluated } from 'seasoned-evaluator'
 
 // MyComponent
-<Evaluated length={5} average={3.3} />
+<Evaluated length={10} average={8.3} />
             `}
           </SyntaxHighlighter>
         </CardContent>
@@ -38,7 +38,7 @@ import { Evaluated } from 'seasoned-evaluator'
         <CardHeader title="Rate" />
         <CardContent>
           <Evaluator
-            length={10}
+            length={3}
             iconEmpty={<FavoriteBorder color="secondary" />}
             iconFull={<Favorite color="secondary" />}
             disableComment={true}
@@ -56,7 +56,7 @@ const changeFavorite = ({ rating }) => {
 }
 return (
   <Evaluator
-    length={10}
+    length={3}
     iconEmpty={<FavoriteBorder color="secondary" />}
     iconFull={<Favorite color="secondary" />}
     disableComment={true}
