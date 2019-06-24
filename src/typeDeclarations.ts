@@ -7,6 +7,7 @@ export type SubjectObject = {
 export type Subject = string | SubjectObject
 
 export interface BaseProps {
+  average?: number
   length?: PossibleNumbers
   iconEmpty?: JSX.Element
   iconHalf?: JSX.Element

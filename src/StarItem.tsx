@@ -8,7 +8,6 @@ interface ItemProps extends BaseProps {
   index: PossibleNumbers
   chosen: PossibleNumbers
   hovered: PossibleNumbers
-  average: number
   setChosen: (t: 0 | PossibleNumbers) => void
   setHovered: (t: number) => void
 }
@@ -31,8 +30,8 @@ export const StarItem = ({
   const isChosen = index <= chosen || (index <= hovered && !disabled)
   const isTransparent = disabled && !isChosen
   const getIcon = (type: 'full' | 'empty' | 'half') =>
-    get({ full: iconFull, half: iconHalf, empty: iconEmpty }, type)
-  return average ? (
+    get({ full: iconFull, half: iconHalf, empty: iconEmpty }, type, iconEmpty)!
+  return typeof average === 'number' ? (
     getIcon(ratingIconType(index, average))
   ) : (
     <span
