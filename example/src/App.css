@@ -13,20 +13,38 @@ body {
   align-items: stretch;
   color: white;
   display: flex;
+  flex: 1;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
   justify-content: stretch;
   text-align: center;
   padding: 1rem;
   min-height: 60vh;
-  width: 80vw;
+}
+
+#root {
+  display: flex;
+  flex: 1;
+  justify-content: center;
 }
 
 .App > div {
-  color: #00dcff;
   display: flex;
   flex: 1;
+  justify-content: space-evenly;
 }
+
+.MuiPaper-root {
+  flex: 1;
+  max-width: 30%;
+  text-align: left;
+}
+
+.MuiPaper-root.rating {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
 }
 
 a {

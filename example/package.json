@@ -5,12 +5,14 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.1.2",
+    "@material-ui/icons": "^4.2.1",
     "@reach/router": "latest",
-    "seasoned-evaluator": "link:..",
     "prop-types": "latest",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "seasoned-evaluator": "link:.."
   },
   "scripts": {
     "start": "react-scripts start",
