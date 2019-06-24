@@ -68,6 +68,34 @@ return (
           </SyntaxHighlighter>
         </CardContent>
       </Card>
+      <Card elevation={5} className="rating">
+        <CardHeader title="Like it!" />
+        <CardContent>
+          <Evaluator
+            length={1}
+            iconEmpty={
+              <FavoriteBorder style={{ fontSize: 50 }} color="secondary" />
+            }
+            iconFull={<Favorite style={{ fontSize: 50 }} color="secondary" />}
+            disableComment={true}
+            onChange={() => {}}
+          />
+          <SyntaxHighlighter language="javascript" style={prism}>
+            {`
+import { Evaluator } from 'seasoned-evaluator'
+
+// MyComponent
+<Evaluator
+  length={1}
+  iconEmpty={<FavoriteBorder style={{ fontSize: 50 }} />}
+  iconFull={<Favorite style={{ fontSize: 50 }} />}
+  disableComment={true}
+  onChange={values => tellBackendThatILike(!!values.rating)}
+/>
+            `}
+          </SyntaxHighlighter>
+        </CardContent>
+      </Card>
       <Card elevation={5}>
         <CardHeader title="Rate and review" />
         <CardContent>
