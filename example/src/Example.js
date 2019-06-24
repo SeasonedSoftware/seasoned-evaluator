@@ -1,6 +1,10 @@
 import React from 'react'
-import { foo } from 'new-react-lib'
+import Evaluator from 'seasoned-evaluator'
 
-const Example = () => <div>{foo()}</div>
+const Example = () => (
+  <div>
+    <Evaluator onChange={console.log} />
+  </div>
+)
 
 export default Example

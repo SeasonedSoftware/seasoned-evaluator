@@ -1,12 +1,12 @@
 {
-  "name": "new-react-lib-example",
-  "homepage": "https://SeasonedSoftware.github.io/new-react-lib",
+  "name": "seasoned-evaluator-example",
+  "homepage": "https://SeasonedSoftware.github.io/seasoned-evaluator",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "@reach/router": "latest",
-    "new-react-lib": "link:..",
+    "seasoned-evaluator": "link:..",
     "prop-types": "latest",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
