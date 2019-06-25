@@ -24,15 +24,15 @@ const Example = () => {
         <CardHeader title="Past reviews" />
         <CardContent>
           <Evaluator disabled length={10} initialRating={8.3} />
-          <SyntaxHighlighter language="javascript" style={prism}>
-            {`
+        </CardContent>
+        <SyntaxHighlighter language="javascript" style={prism}>
+          {`
 import Evaluator from 'seasoned-evaluator'
 
 // MyComponent
 <Evaluator disabled length={10} initialRating={8.3} />
-            `}
-          </SyntaxHighlighter>
-        </CardContent>
+          `}
+        </SyntaxHighlighter>
       </Card>
       <Card elevation={5} className="rating">
         <CardHeader title="Rate" />
@@ -44,8 +44,9 @@ import Evaluator from 'seasoned-evaluator'
             disabled={!!favorite}
             onChange={changeFavorite}
           />
-          <SyntaxHighlighter language="javascript" style={prism}>
-            {`
+        </CardContent>
+        <SyntaxHighlighter language="javascript" style={prism}>
+          {`
 import Evaluator from 'seasoned-evaluator'
 
 // MyComponent
@@ -62,9 +63,8 @@ return (
     onChange={changeFavorite}
   />
 )
-            `}
-          </SyntaxHighlighter>
-        </CardContent>
+          `}
+        </SyntaxHighlighter>
       </Card>
       <Card elevation={5} className="rating">
         <CardHeader title="Like it!" />
@@ -77,8 +77,9 @@ return (
             iconFull={<Favorite style={{ fontSize: 50 }} color="secondary" />}
             onChange={() => {}}
           />
-          <SyntaxHighlighter language="javascript" style={prism}>
-            {`
+        </CardContent>
+        <SyntaxHighlighter language="javascript" style={prism}>
+          {`
 import Evaluator from 'seasoned-evaluator'
 
 // MyComponent
@@ -88,9 +89,8 @@ import Evaluator from 'seasoned-evaluator'
   iconFull={<Favorite style={{ fontSize: 50 }} />}
   onChange={values => tellBackendThatILike(!!values.rating)}
 />
-            `}
-          </SyntaxHighlighter>
-        </CardContent>
+          `}
+        </SyntaxHighlighter>
       </Card>
       <Card elevation={5}>
         <CardHeader title="Rate and review" />
@@ -107,8 +107,9 @@ import Evaluator from 'seasoned-evaluator'
           />
           <Divider />
           <Typography variant="body2">{JSON.stringify(value)}</Typography>
-          <SyntaxHighlighter language="javascript" style={prism}>
-            {`
+        </CardContent>
+        <SyntaxHighlighter language="javascript" style={prism}>
+          {`
 import Evaluator from 'seasoned-evaluator'
 
 // MyComponent
@@ -127,9 +128,8 @@ return (
     {JSON.stringify(value)}
   </>
 )
-            `}
-          </SyntaxHighlighter>
-        </CardContent>
+          `}
+        </SyntaxHighlighter>
       </Card>
     </>
   )

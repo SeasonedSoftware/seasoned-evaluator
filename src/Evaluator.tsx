@@ -1,4 +1,4 @@
-import React, { useMemo, useState, ChangeEvent } from 'react'
+import React, { memo, useMemo, useState, ChangeEvent } from 'react'
 import map from 'lodash/map'
 import { TextField } from '@material-ui/core'
 import { initSubjects, formatSubject, useOnMount } from './utils'
@@ -78,4 +78,4 @@ Evaluator.defaultProps = {
   subjects: ['rating'],
 }
 
-export default Evaluator
+export default memo(Evaluator)
