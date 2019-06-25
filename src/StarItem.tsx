@@ -14,7 +14,6 @@ interface ItemProps extends BaseProps {
 
 export const StarItem = ({
   index,
-  initialRating,
   setRating,
   setHovered,
   iconEmpty,
