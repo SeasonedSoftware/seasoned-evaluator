@@ -35,7 +35,7 @@ export const StarItem = ({
   }
 
   const value = Math.max(disabled ? 0 : hovered, rating)
-  const isTransparent = disabled && index > value
+  const isTransparent = disabled && index > Math.ceil(value)
   const getIcon = (type: 'full' | 'empty' | 'half') =>
     get({ full: iconFull, half: iconHalf, empty: iconEmpty }, type, iconEmpty)!
   return (
@@ -43,7 +43,10 @@ export const StarItem = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
-      style={{ opacity: isTransparent ? 0.6 : 1 }}
+      style={{
+        opacity: isTransparent ? 0.6 : 1,
+        cursor: disabled ? 'default' : 'pointer',
+      }}
     >
       {getIcon(ratingIconType(index, value))}
     </span>

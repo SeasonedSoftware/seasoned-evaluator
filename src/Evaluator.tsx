@@ -6,7 +6,7 @@ import Rating from './Rating'
 import { Subject, BaseProps, SubjectObject } from './typeDeclarations'
 
 interface EvaluatorProps extends BaseProps {
-  onChange: (t: any) => void
+  onChange?: (t: any) => void
   enableComment?: boolean
   commentLabel?: string
   subjects: Subject[]
@@ -28,18 +28,20 @@ const Evaluator = ({
   const [state, setState] = useState(allSubjects)
   const [comment, setComment] = useState('')
 
-  useOnMount(() => onChange(state))
+  useOnMount(() => onChange && onChange(state))
 
   const onChangeRating = (name: string, rating: number) => {
+    if (!onChange) return undefined
     const newState = { ...state, [name]: rating }
     setState(newState)
-    onChange(enableComment ? { ...newState, comment } : newState)
+    return onChange(enableComment ? { ...newState, comment } : newState)
   }
 
   const updateComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    if (!onChange) return undefined
     const comment = event.target.value
     setComment(comment)
-    onChange({ ...state, comment })
+    return onChange({ ...state, comment })
   }
 
   return (
