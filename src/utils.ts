@@ -1,32 +1,36 @@
+import { useEffect } from 'react'
 import { Subject, PossibleNumbers, SubjectObject } from './typeDeclarations'
 
-export function initSubjects(
-  subjects?: Subject[],
-  length: PossibleNumbers = 5,
-) {
-  return subjects
-    ? subjects.reduce((sum: any, curr: Subject) => {
-        const data = formatSubject(curr, length)
-        sum[data.name] = 0
-        return sum
-      }, {})
-    : { rating: 0 }
+export function initSubjects(subjects: SubjectObject[]) {
+  return subjects.reduce((sum: any, curr: SubjectObject) => {
+    sum[curr.name] = curr.initial
+    return sum
+  }, {})
 }
 
 export function formatSubject(
   subject: Subject,
   length: PossibleNumbers = 5,
+  initialRating: number = 0,
 ): SubjectObject {
+  console.log(subject)
   return typeof subject === 'string'
-    ? { name: subject, length, title: subject }
+    ? { name: subject, length, title: subject, initial: initialRating || 0 }
     : {
         ...subject,
         title: subject.title || subject.name,
         length: subject.length || length,
+        initial: subject.initial || initialRating || 0,
       }
 }
 
-export const ratingIconType = (index: PossibleNumbers, rating: number) => {
+export const ratingIconType = (index: PossibleNumbers, rating: number = 0) => {
   if (rating >= index || index - rating < 0.25) return 'full'
   return index - rating < 0.75 ? 'half' : 'empty'
+}
+
+export const useOnMount = (callback: () => void) => {
+  useEffect(() => {
+    callback()
+  }, [])
 }

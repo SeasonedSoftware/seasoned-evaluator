@@ -1,57 +1,64 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useMemo, useState, ChangeEvent } from 'react'
 import map from 'lodash/map'
 import { TextField } from '@material-ui/core'
-import { initSubjects } from './utils'
+import { initSubjects, formatSubject, useOnMount } from './utils'
 import Rating from './Rating'
-import { Subject, PossibleNumbers, BaseProps } from './typeDeclarations'
+import { Subject, BaseProps, SubjectObject } from './typeDeclarations'
 
 interface EvaluatorProps extends BaseProps {
   onChange: (t: any) => void
-  disableComment?: boolean
+  enableComment?: boolean
   commentLabel?: string
+  subjects: Subject[]
 }
 
-export const Evaluator = ({
+const Evaluator = ({
   onChange,
   subjects,
   commentLabel,
-  disableComment,
+  enableComment,
+  initialRating = 0,
   ...props
 }: EvaluatorProps): JSX.Element => {
-  const allSubjects = initSubjects(subjects, props.length)
+  const formatter = (subject: Subject) =>
+    formatSubject(subject, props.length, initialRating)
+  const formatedSubjects = useMemo(() => subjects.map(formatter), [])
+  const allSubjects = initSubjects(formatedSubjects)
+
   const [state, setState] = useState(allSubjects)
+  const [comment, setComment] = useState('')
 
-  const setStatePart = (object: Object) => {
-    const newState = { ...state, ...object }
+  useOnMount(() => onChange(state))
+
+  const onChangeRating = (name: string, rating: number) => {
+    const newState = { ...state, [name]: rating }
     setState(newState)
-    onChange(newState)
-  }
-
-  const onChangeRating = (name: string, rating: 0 | PossibleNumbers) => {
-    setStatePart({ [name]: rating })
+    onChange(enableComment ? { ...newState, comment } : newState)
   }
 
   const updateComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setStatePart({ comment: event.target.value })
+    const comment = event.target.value
+    setComment(comment)
+    onChange({ ...state, comment })
   }
 
   return (
     <>
-      {subjects ? (
-        map(subjects, (subject: Subject, index: number) => (
+      {map(formatedSubjects, (subject: SubjectObject, index: number) => {
+        return (
           <Rating
             key={index}
             onChange={onChangeRating}
             subject={subject}
+            rating={state[subject.name]}
+            showLabel={subjects.length > 1}
             {...props}
           />
-        ))
-      ) : (
-        <Rating onChange={onChangeRating} subject="" {...props} />
-      )}
-      {disableComment || (
+        )
+      })}
+      {enableComment && (
         <TextField
-          value={state.comment}
+          value={comment}
           onChange={updateComment}
           label={commentLabel}
           multiline
@@ -64,6 +71,9 @@ export const Evaluator = ({
 
 Evaluator.defaultProps = {
   commentLabel: 'Leave your comment',
-  disableComment: false,
+  enableComment: false,
   disabled: false,
+  subjects: ['rating'],
 }
+
+export default Evaluator

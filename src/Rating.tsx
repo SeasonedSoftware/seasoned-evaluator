@@ -1,49 +1,41 @@
 import React, { useState } from 'react'
 import times from 'lodash/times'
 import { InputLabel } from '@material-ui/core'
-import { formatSubject } from './utils'
 import { StarItem } from './StarItem'
-import {
-  Subject,
-  PossibleNumbers,
-  SubjectObject,
-  BaseProps,
-} from './typeDeclarations'
+import { PossibleNumbers, SubjectObject, BaseProps } from './typeDeclarations'
 
 interface RatingProps extends BaseProps {
-  subject: Subject
-  onChange: (a: string, b: 0 | PossibleNumbers) => void
+  subject: SubjectObject
+  onChange: (a: string, b: number) => void
+  showLabel: boolean
+  rating: number
 }
 const Rating = ({
   length = 5,
   onChange,
   subject,
+  showLabel,
   ...props
 }: RatingProps): JSX.Element => {
   const [hovered, setHovered] = useState(0)
-  const [chosen, setChosen] = useState(0)
 
-  const data: SubjectObject = formatSubject(subject, length)
-
-  const onChoice = (value: 0 | PossibleNumbers) => {
+  const onChoice = (value: number) => {
     if (!props.disabled) {
-      setChosen(value)
-      onChange(data.name || 'rating', value)
+      onChange(subject.name || 'rating', value)
     }
   }
 
   return (
     <div>
-      {data.title && <InputLabel>{data.title}</InputLabel>}
-      {times(data.length!, (index: number) => (
+      {showLabel && <InputLabel>{subject.title}</InputLabel>}
+      {times(subject.length!, (index: number) => (
         <StarItem
           {...props}
           key={`rating=${index}`}
           index={(index + 1) as PossibleNumbers}
-          setChosen={onChoice}
+          setRating={onChoice}
           setHovered={setHovered}
           hovered={hovered as PossibleNumbers}
-          chosen={chosen as PossibleNumbers}
         />
       ))}
     </div>

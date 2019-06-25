@@ -1,2 +1,3 @@
-export { Evaluator } from './Evaluator'
-export { Evaluated } from './Evaluated'
+import Evaluator from './Evaluator'
+
+export default Evaluator

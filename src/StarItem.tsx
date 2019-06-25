@@ -6,41 +6,46 @@ import { ratingIconType } from './utils'
 
 interface ItemProps extends BaseProps {
   index: PossibleNumbers
-  chosen: PossibleNumbers
   hovered: PossibleNumbers
-  setChosen: (t: 0 | PossibleNumbers) => void
+  rating: number
+  setRating: (t: 0 | PossibleNumbers) => void
   setHovered: (t: number) => void
 }
 
 export const StarItem = ({
   index,
-  average,
-  setChosen,
+  initialRating,
+  setRating,
   setHovered,
   iconEmpty,
   iconHalf,
   iconFull,
   hovered,
-  chosen,
+  rating,
   disabled,
 }: ItemProps) => {
   const onMouseEnter = () => setHovered && setHovered(index)
   const onMouseLeave = () => setHovered && setHovered(0)
-  const onClick = () => setChosen && setChosen(chosen === index ? 0 : index)
-  const isChosen = index <= chosen || (index <= hovered && !disabled)
-  const isTransparent = disabled && !isChosen
+
+  const onClick = () => {
+    if (!disabled && setRating) {
+      const value = rating === index ? 0 : index
+      setRating(value)
+    }
+  }
+
+  const value = Math.max(disabled ? 0 : hovered, rating)
+  const isTransparent = disabled && index > value
   const getIcon = (type: 'full' | 'empty' | 'half') =>
     get({ full: iconFull, half: iconHalf, empty: iconEmpty }, type, iconEmpty)!
-  return typeof average === 'number' ? (
-    getIcon(ratingIconType(index, average))
-  ) : (
+  return (
     <span
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
       style={{ opacity: isTransparent ? 0.6 : 1 }}
     >
-      {isChosen ? getIcon('full') : getIcon('empty')}
+      {getIcon(ratingIconType(index, value))}
     </span>
   )
 }

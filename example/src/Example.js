@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import { Favorite, FavoriteBorder } from '@material-ui/icons'
 
-import { Evaluator, Evaluated } from 'seasoned-evaluator'
+import Evaluator from 'seasoned-evaluator'
 
 const Example = () => {
   const [value, setValue] = useState('')
@@ -23,13 +23,13 @@ const Example = () => {
       <Card elevation={5} className="rating">
         <CardHeader title="Past reviews" />
         <CardContent>
-          <Evaluated length={10} average={8.3} />
+          <Evaluator disabled length={10} initialRating={8.3} />
           <SyntaxHighlighter language="javascript" style={prism}>
             {`
-import { Evaluated } from 'seasoned-evaluator'
+import Evaluator from 'seasoned-evaluator'
 
 // MyComponent
-<Evaluated length={10} average={8.3} />
+<Evaluator disabled length={10} initialRating={8.3} />
             `}
           </SyntaxHighlighter>
         </CardContent>
@@ -41,13 +41,12 @@ import { Evaluated } from 'seasoned-evaluator'
             length={3}
             iconEmpty={<FavoriteBorder color="secondary" />}
             iconFull={<Favorite color="secondary" />}
-            disableComment={true}
             disabled={!!favorite}
             onChange={changeFavorite}
           />
           <SyntaxHighlighter language="javascript" style={prism}>
             {`
-import { Evaluator } from 'seasoned-evaluator'
+import Evaluator from 'seasoned-evaluator'
 
 // MyComponent
 const [favorite, setFavorite] = useState(0)
@@ -59,7 +58,6 @@ return (
     length={3}
     iconEmpty={<FavoriteBorder color="secondary" />}
     iconFull={<Favorite color="secondary" />}
-    disableComment={true}
     disabled={!!favorite}
     onChange={changeFavorite}
   />
@@ -77,19 +75,17 @@ return (
               <FavoriteBorder style={{ fontSize: 50 }} color="secondary" />
             }
             iconFull={<Favorite style={{ fontSize: 50 }} color="secondary" />}
-            disableComment={true}
             onChange={() => {}}
           />
           <SyntaxHighlighter language="javascript" style={prism}>
             {`
-import { Evaluator } from 'seasoned-evaluator'
+import Evaluator from 'seasoned-evaluator'
 
 // MyComponent
 <Evaluator
   length={1}
   iconEmpty={<FavoriteBorder style={{ fontSize: 50 }} />}
   iconFull={<Favorite style={{ fontSize: 50 }} />}
-  disableComment={true}
   onChange={values => tellBackendThatILike(!!values.rating)}
 />
             `}
@@ -102,17 +98,18 @@ import { Evaluator } from 'seasoned-evaluator'
           <Evaluator
             subjects={[
               'Overral',
-              { name: 'Sound', length: 3 },
+              { name: 'Sound', length: 3, initial: 2.4 },
               { name: 'Drinks', title: 'Soft Drinks' },
             ]}
             commentLabel="Review"
             onChange={setValue}
+            enableComment
           />
           <Divider />
           <Typography variant="body2">{JSON.stringify(value)}</Typography>
           <SyntaxHighlighter language="javascript" style={prism}>
             {`
-import { Evaluator } from 'seasoned-evaluator'
+import Evaluator from 'seasoned-evaluator'
 
 // MyComponent
 const [value, setValue] = useState('')
@@ -121,8 +118,8 @@ return (
     <Evaluator
       subjects={[
         'Overral',
-        { name: 'Sound', length: 3 },
-        { name: 'Drinks', title: 'Soft Drinks' },
+        { name: 'Sound', length: 3, initial: 2.4 },
+        { name: 'Drinks', title: 'Soft Drinks', initial: 4 },
       ]}
       commentLabel="Review"
       onChange={setValue}

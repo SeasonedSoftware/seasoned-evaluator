@@ -3,15 +3,15 @@ export type SubjectObject = {
   title?: string
   name: string
   length?: PossibleNumbers
+  initial: number
 }
 export type Subject = string | SubjectObject
 
 export interface BaseProps {
-  average?: number
+  initialRating?: number
   length?: PossibleNumbers
   iconEmpty?: JSX.Element
   iconHalf?: JSX.Element
   iconFull?: JSX.Element
-  subjects?: Subject[]
   disabled?: boolean
 }

@@ -3,12 +3,12 @@ import Rating from './Rating'
 import { BaseProps } from './typeDeclarations'
 
 interface EvaluatedProps extends BaseProps {
-  average: number
-  showAverage?: boolean
+  initialRating: number
+  showinitialRating?: boolean
 }
 
 export const Evaluated = ({
-  showAverage,
+  showinitialRating,
   ...props
 }: EvaluatedProps): JSX.Element => {
   return <Rating {...props} onChange={() => {}} subject="" disabled />
