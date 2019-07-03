@@ -13,7 +13,6 @@ export function formatSubject(
   length: PossibleNumbers = 5,
   initialRating: number = 0,
 ): SubjectObject {
-  console.log(subject)
   return typeof subject === 'string'
     ? { name: subject, length, title: subject, initial: initialRating || 0 }
     : {
