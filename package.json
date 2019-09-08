@@ -1,6 +1,6 @@
 {
   "name": "seasoned-evaluator",
-  "version": "0.0.9",
+  "version": "0.0.8",
   "description": "Simple UI component to add and read reviews.",
   "author": "SeasonedSoftware",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "build:js": "rollup -c",
     "build:types": "tsc --emitDeclarationOnly",
     "release": "npm version",
-    "postrelease": "npm publish",
+    "postrelease": "npm publish && git push --tags && git push",
     "start": "rollup -c -w",
     "prepare": "yarn run build",
     "predeploy": "yarn build && cd example/ && yarn build && cd ../",
